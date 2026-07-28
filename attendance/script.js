@@ -1,11 +1,20 @@
+let present = 0;
+let absent = 0;
+
 function createList() {
 
     let count = parseInt(document.getElementById("studentCount").value);
 
     if (isNaN(count) || count <= 0) {
-        alert("Enter a valid number of students.");
+        alert("Enter a valid number.");
         return;
     }
+
+    present = 0;
+    absent = 0;
+
+    document.getElementById("presentCount").innerHTML = 0;
+    document.getElementById("absentCount").innerHTML = 0;
 
     let output = "";
 
@@ -16,7 +25,7 @@ function createList() {
 
             <input
             type="text"
-            placeholder="Enter Student ${i} Name">
+            placeholder="Student ${i} Name">
 
             <button onclick="markPresent(this)">
                 ✅ Present
@@ -39,14 +48,26 @@ function createList() {
 
 function markPresent(button){
 
-    button.style.background="green";
-    button.style.color="white";
+    button.disabled = true;
+
+    button.style.background = "green";
+    button.style.color = "white";
+
+    present++;
+
+    document.getElementById("presentCount").innerHTML = present;
 
 }
 
 function markAbsent(button){
 
-    button.style.background="red";
-    button.style.color="white";
+    button.disabled = true;
+
+    button.style.background = "red";
+    button.style.color = "white";
+
+    absent++;
+
+    document.getElementById("absentCount").innerHTML = absent;
 
 }
