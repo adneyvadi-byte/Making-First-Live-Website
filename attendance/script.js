@@ -49,7 +49,7 @@ placeholder="Student Name">
     }
 
     document.getElementById("studentList").innerHTML = output;
-
+    localStorage.setItem("studentList", output);
 }
 
 function markPresent(button){
@@ -144,5 +144,16 @@ table.push([
     XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
 
     XLSX.writeFile(workbook, "Attendance.xlsx");
+
+}
+window.onload = function () {
+
+    let saved = localStorage.getItem("studentList");
+
+    if (saved) {
+
+        document.getElementById("studentList").innerHTML = saved;
+
+    }
 
 }
