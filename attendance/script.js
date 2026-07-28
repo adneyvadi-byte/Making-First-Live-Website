@@ -191,10 +191,18 @@ function saveAttendance() {
             attendance = "Absent";
         }
 
-        records.push({
-            roll: roll,
-            name: name,
-            attendance: attendance
+        let lectureDate = document.getElementById("lectureDate").value;
+let className = document.getElementById("className").value;
+let subject = document.getElementById("subject").value;
+
+records.push({
+    date: lectureDate,
+    className: className,
+    subject: subject,
+    roll: roll,
+    name: name,
+    attendance: attendance
+});
         });
 
     });
