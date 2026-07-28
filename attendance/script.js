@@ -267,3 +267,40 @@ function deleteStudent(index){
     }
 
 }
+function viewAttendance() {
+
+    let history = JSON.parse(localStorage.getItem("attendanceRecords")) || [];
+
+    if (history.length === 0) {
+        document.getElementById("history").innerHTML =
+            "<p>No attendance records found.</p>";
+        return;
+    }
+
+    let output = "";
+
+    history.forEach((lecture, index) => {
+
+        output += `
+        <div class="student">
+
+            <h3>Lecture ${index + 1}</h3>
+
+            <p><b>Date:</b> ${lecture.date}</p>
+
+            <p><b>Class:</b> ${lecture.className}</p>
+
+            <p><b>Subject:</b> ${lecture.subject}</p>
+
+            <p><b>Total Students:</b> ${lecture.students.length}</p>
+
+            <hr>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("history").innerHTML = output;
+
+}
