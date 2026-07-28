@@ -18,11 +18,47 @@
 
 <h1>📋 Attendance Management System</h1>
 
-<p>Create a student list and take attendance.</p>
+<p>Professional Attendance Management System</p>
+
+<div class="dashboard">
+
+<div class="card">
+
+<h3>👨‍🎓 Students</h3>
+
+<p id="studentTotal">0</p>
+
+</div>
+
+<div class="card">
+
+<h3>✅ Present</h3>
+
+<p id="presentCount">0</p>
+
+</div>
+
+<div class="card">
+
+<h3>❌ Absent</h3>
+
+<p id="absentCount">0</p>
+
+</div>
+
+<div class="card">
+
+<h3>📊 Attendance</h3>
+
+<p id="attendancePercent">0%</p>
+
+</div>
+
+</div>
 
 <div class="box">
 
-<label><b>Lecture Date</b></label><br>
+<label><b>📅 Lecture Date</b></label><br>
 
 <input
 type="date"
@@ -30,7 +66,7 @@ id="lectureDate">
 
 <br><br>
 
-<label><b>Class Name</b></label><br>
+<label><b>🏫 Class Name</b></label><br>
 
 <input
 type="text"
@@ -39,7 +75,7 @@ placeholder="Enter Class Name">
 
 <br><br>
 
-<label><b>Subject</b></label><br>
+<label><b>📚 Subject</b></label><br>
 
 <input
 type="text"
@@ -48,22 +84,24 @@ placeholder="Enter Subject">
 
 <br><br>
 
-<label><b>Number of Students</b></label><br>
-
-<input
-type="number"
-id="studentCount"
-placeholder="Enter Number of Students">
-
-<br><br>
-
 <button onclick="createList()">
-Create Student List
+
+📋 Create Attendance Sheet
+
 </button>
 
 </div>
-
 <hr>
+
+<h2>📋 Today's Attendance</h2>
+
+<input
+type="text"
+id="searchStudent"
+placeholder="🔍 Search Student..."
+onkeyup="searchStudent()">
+
+<br><br>
 
 <div id="studentList"></div>
 
@@ -74,21 +112,27 @@ Create Student List
 </button>
 
 <button onclick="exportToExcel()">
-📥 Export Attendance to Excel
+📥 Export Excel
 </button>
 
 <button onclick="viewAttendance()">
-📋 View Saved Attendance
+📜 Attendance History
+</button>
+
+<button onclick="showReport()">
+📊 Attendance Report
 </button>
 
 <button onclick="clearData()">
-🗑 Clear All Data
+🗑 Clear Data
 </button>
 
-<br><br>
+<hr>
 <hr>
 
 <h2>👨‍🎓 Student Database</h2>
+
+<p>Add students once. They will be available for every lecture.</p>
 
 <input
 type="text"
@@ -104,12 +148,33 @@ placeholder="Student Name">
 ➕ Add Student
 </button>
 
+<button onclick="showDatabase()">
+📋 Show Students
+</button>
+
+<br><br>
+
+<input
+type="text"
+id="searchDatabase"
+placeholder="🔍 Search Student"
+onkeyup="searchDatabase()">
+
+<br><br>
+
 <div id="database"></div>
 
 <hr>
-<h2>Attendance Summary</h2>
+<hr>
+
+<h2>📊 Attendance Summary</h2>
 
 <p>Total Lectures : <span id="totalLectures">1</span></p>
+
+<p>
+👨‍🎓 Total Students :
+<span id="studentTotalSummary">0</span>
+</p>
 
 <p>
 ✅ Present :
@@ -121,13 +186,34 @@ placeholder="Student Name">
 <span id="absentCount">0</span>
 </p>
 
-<br>
+<p>
+📈 Attendance Percentage :
+<span id="attendancePercentSummary">0%</span>
+</p>
 
-<div id="history"></div>
+<hr>
 
-<br>
+<h2>📜 Attendance History</h2>
 
-<a href="../index.html">
+<div id="history">
+
+<p>No attendance history available.</p>
+
+</div>
+
+<hr>
+
+<h2>📊 Attendance Percentage Report</h2>
+
+<div id="report">
+
+<p>No report generated.</p>
+
+</div>
+
+<hr>
+
+<a class="backButton" href="../index.html">
 ⬅ Back to Portfolio
 </a>
 
