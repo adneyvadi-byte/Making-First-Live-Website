@@ -1,12 +1,13 @@
 let present = 0;
 let absent = 0;
 let studentDatabase = [];
+
 function createList() {
 
-    let count = parseInt(document.getElementById("studentCount").value);
+    let data = JSON.parse(localStorage.getItem("studentDatabase")) || [];
 
-    if (isNaN(count) || count <= 0) {
-        alert("Please enter a valid number of students.");
+    if (data.length === 0) {
+        alert("Please add students to the Student Database first.");
         return;
     }
 
@@ -18,16 +19,12 @@ function createList() {
 
     let output = "";
 
-    for (let i = 1; i <= count; i++) {
+    data.forEach(student => {
 
         output += `
         <div class="student">
 
-            <h3>Student ${i}</h3>
-
-            <input type="text" placeholder="Roll Number">
-
-            <input type="text" placeholder="Student Name">
+            <h3>${student.roll} - ${student.name}</h3>
 
             <button onclick="markPresent(this)">
                 ✅ Present
@@ -41,36 +38,34 @@ function createList() {
 
         </div>
         `;
-    }
+
+    });
 
     document.getElementById("studentList").innerHTML = output;
-
-    localStorage.setItem("studentList", output);
 
 }
 
 function markPresent(button){
 
-    button.style.background = "green";
-    button.style.color = "white";
+    button.style.background="green";
+    button.style.color="white";
 
     present++;
 
-    document.getElementById("presentCount").innerHTML = present;
+    document.getElementById("presentCount").innerHTML=present;
 
 }
 
 function markAbsent(button){
 
-    button.style.background = "red";
-    button.style.color = "white";
+    button.style.background="red";
+    button.style.color="white";
 
     absent++;
 
-    document.getElementById("absentCount").innerHTML = absent;
+    document.getElementById("absentCount").innerHTML=absent;
 
 }
-
 function saveAttendance(){
 
     let records = [];
@@ -81,16 +76,11 @@ function saveAttendance(){
 
     let students = document.querySelectorAll(".student");
 
-    students.forEach(student=>{
-
-        let inputs = student.querySelectorAll("input");
-
-        let roll = inputs[0].value;
-        let name = inputs[1].value;
-
-        let attendance = "Not Marked";
+    students.forEach((student,index)=>{
 
         let buttons = student.querySelectorAll("button");
+
+        let attendance = "Not Marked";
 
         if(buttons[0].style.background==="green"){
             attendance="Present";
@@ -100,12 +90,14 @@ function saveAttendance(){
             attendance="Absent";
         }
 
+        let data = JSON.parse(localStorage.getItem("studentDatabase")) || [];
+
         records.push({
             date:lectureDate,
             className:className,
             subject:subject,
-            roll:roll,
-            name:name,
+            roll:data[index].roll,
+            name:data[index].name,
             attendance:attendance
         });
 
@@ -116,7 +108,7 @@ function saveAttendance(){
         JSON.stringify(records)
     );
 
-    alert("Attendance Saved Successfully!");
+    alert("✅ Attendance Saved Successfully!");
 
 }
 
@@ -125,94 +117,144 @@ function exportToExcel(){
     let records = JSON.parse(localStorage.getItem("attendanceRecords"));
 
     if(records==null || records.length==0){
+
         alert("No attendance records found.");
+
         return;
+
     }
 
     let workbook = XLSX.utils.book_new();
 
     let worksheet = XLSX.utils.json_to_sheet(records);
 
-    XLSX.utils.book_append_sheet(workbook,worksheet,"Attendance");
+    XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        "Attendance"
+    );
 
-    XLSX.writeFile(workbook,"Attendance.xlsx");
+    XLSX.writeFile(
+        workbook,
+        "Attendance.xlsx"
+    );
 
 }
 
 function clearData(){
 
-    localStorage.removeItem("attendanceRecords");
-    localStorage.removeItem("studentList");
+    if(confirm("Delete all saved attendance and student data?")){
 
-    document.getElementById("studentList").innerHTML="";
+        localStorage.removeItem("attendanceRecords");
+        localStorage.removeItem("studentDatabase");
+        localStorage.removeItem("studentList");
 
-    present=0;
-    absent=0;
+        document.getElementById("studentList").innerHTML="";
+        document.getElementById("database").innerHTML="";
 
-    document.getElementById("presentCount").innerHTML=0;
-    document.getElementById("absentCount").innerHTML=0;
+        present=0;
+        absent=0;
 
-    alert("All data cleared.");
+        document.getElementById("presentCount").innerHTML=0;
+        document.getElementById("absentCount").innerHTML=0;
+
+        alert("All data cleared.");
+
+    }
 
 }
 
 window.onload=function(){
 
-    let saved=localStorage.getItem("studentList");
-
-    if(saved){
-
-        document.getElementById("studentList").innerHTML=saved;
-        showDatabase();
-    }
+    showDatabase();
 
 }
 function addStudent(){
 
-    let roll=document.getElementById("rollNumber").value;
-    let name=document.getElementById("studentName").value;
+    let roll = document.getElementById("rollNumber").value.trim();
+    let name = document.getElementById("studentName").value.trim();
 
     if(roll==="" || name===""){
         alert("Please enter Roll Number and Student Name.");
         return;
     }
 
-    studentDatabase.push({
-        roll:roll,
-        name:name
+    let data = JSON.parse(localStorage.getItem("studentDatabase")) || [];
+
+    // Check duplicate roll number
+    let exists = data.some(student => student.roll === roll);
+
+    if(exists){
+        alert("Roll Number already exists.");
+        return;
+    }
+
+    data.push({
+        roll: roll,
+        name: name
     });
 
     localStorage.setItem(
         "studentDatabase",
-        JSON.stringify(studentDatabase)
+        JSON.stringify(data)
     );
 
     showDatabase();
 
-    document.getElementById("rollNumber").value="";
-    document.getElementById("studentName").value="";
+    document.getElementById("rollNumber").value = "";
+    document.getElementById("studentName").value = "";
 
 }
+
 function showDatabase(){
 
-    let data=JSON.parse(localStorage.getItem("studentDatabase")) || [];
+    let data = JSON.parse(localStorage.getItem("studentDatabase")) || [];
 
-    studentDatabase=data;
+    let output = "";
 
-    let output="";
+    if(data.length===0){
 
-    data.forEach(student=>{
+        output = "<p>No students added yet.</p>";
 
-        output+=`
-        <div class="student">
+    }else{
 
-        <b>${student.roll}</b> - ${student.name}
+        data.forEach((student,index)=>{
 
-        </div>
-        `;
+            output += `
+            <div class="student">
 
-    });
+                <h3>${student.roll} - ${student.name}</h3>
 
-    document.getElementById("database").innerHTML=output;
+                <button onclick="deleteStudent(${index})">
+                    🗑 Delete
+                </button>
+
+            </div>
+            `;
+
+        });
+
+    }
+
+    document.getElementById("database").innerHTML = output;
+
+}
+
+function deleteStudent(index){
+
+    let data = JSON.parse(localStorage.getItem("studentDatabase")) || [];
+
+    if(confirm("Delete this student?")){
+
+        data.splice(index,1);
+
+        localStorage.setItem(
+            "studentDatabase",
+            JSON.stringify(data)
+        );
+
+        showDatabase();
+
+    }
 
 }
