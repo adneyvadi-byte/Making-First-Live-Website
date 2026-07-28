@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,6 +11,7 @@
 <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
 <div class="container">
@@ -18,6 +21,7 @@
 <p>Create a student list and take attendance.</p>
 
 <div class="box">
+
 <label><b>Lecture Date</b></label><br>
 
 <input
@@ -25,11 +29,14 @@ type="date"
 id="lectureDate">
 
 <br><br>
-<label for="className"><b>Class Name</b></label><br>
+
+<label><b>Class Name</b></label><br>
+
 <input
 type="text"
 id="className"
 placeholder="Enter Class Name">
+
 <br><br>
 
 <label><b>Subject</b></label><br>
@@ -40,9 +47,9 @@ id="subject"
 placeholder="Enter Subject">
 
 <br><br>
-<br><br>
 
-<label for="studentCount"><b>Number of Students</b></label><br>
+<label><b>Number of Students</b></label><br>
+
 <input
 type="number"
 id="studentCount"
@@ -56,23 +63,49 @@ Create Student List
 
 </div>
 
+<hr>
+
 <div id="studentList"></div>
-  <button onclick="saveAttendance()">
+
+<br>
+
+<button onclick="saveAttendance()">
 💾 Save Attendance
-  </button>
+</button>
+
 <button onclick="exportToExcel()">
 📥 Export Attendance to Excel
 </button>
-  <button onclick="clearData()">
-🗑 Clear All Data
-  </button>
-<h2>Attendance Summary</h2>
-<p>Total Lectures : <span id="totalLectures">1</span></p>
-<p>✅ Present : <span id="presentCount">0</span></p>
 
-<p>❌ Absent : <span id="absentCount">0</span></p>
+<button onclick="viewAttendance()">
+📋 View Saved Attendance
+</button>
+
+<button onclick="clearData()">
+🗑 Clear All Data
+</button>
 
 <br><br>
+
+<h2>Attendance Summary</h2>
+
+<p>Total Lectures : <span id="totalLectures">1</span></p>
+
+<p>
+✅ Present :
+<span id="presentCount">0</span>
+</p>
+
+<p>
+❌ Absent :
+<span id="absentCount">0</span>
+</p>
+
+<br>
+
+<div id="history"></div>
+
+<br>
 
 <a href="../index.html">
 ⬅ Back to Portfolio
@@ -81,7 +114,9 @@ Create Student List
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
