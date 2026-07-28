@@ -23,17 +23,23 @@ function createList() {
         output += `
         <div class="student">
 
-            <input
-            type="text"
-            placeholder="Student ${i} Name">
+            <h3>Student ${i}</h3>
 
-            <button onclick="markPresent(this)">
-                ✅ Present
-            </button>
+<input
+type="text"
+placeholder="Roll Number">
 
-            <button onclick="markAbsent(this)">
-                ❌ Absent
-            </button>
+<input
+type="text"
+placeholder="Student Name">
+
+<button onclick="markPresent(this)">
+    ✅ Present
+</button>
+
+<button onclick="markAbsent(this)">
+    ❌ Absent
+</button>
 
         </div>
 
