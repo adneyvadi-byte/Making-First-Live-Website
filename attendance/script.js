@@ -1,23 +1,22 @@
 function createList() {
 
-    let className = document.getElementById("className").value;
     let count = parseInt(document.getElementById("studentCount").value);
 
-    if (count <= 0 || isNaN(count)) {
-        alert("Please enter a valid number of students.");
+    if (isNaN(count) || count <= 0) {
+        alert("Enter a valid number of students.");
         return;
     }
 
     let output = "";
-
-    output += "<h2>" + className + "</h2>";
 
     for (let i = 1; i <= count; i++) {
 
         output += `
         <div class="student">
 
-            <span>Student ${i}</span>
+            <input
+            type="text"
+            placeholder="Enter Student ${i} Name">
 
             <button onclick="markPresent(this)">
                 ✅ Present
@@ -29,7 +28,7 @@ function createList() {
 
         </div>
 
-        <hr>
+        <br>
         `;
 
     }
