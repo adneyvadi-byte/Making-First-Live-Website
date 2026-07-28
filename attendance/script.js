@@ -272,9 +272,12 @@ function viewAttendance() {
     let history = JSON.parse(localStorage.getItem("attendanceRecords")) || [];
 
     if (history.length === 0) {
+
         document.getElementById("history").innerHTML =
-            "<p>No attendance records found.</p>";
+        "<h3>No attendance records found.</h3>";
+
         return;
+
     }
 
     let output = "";
@@ -284,19 +287,65 @@ function viewAttendance() {
         output += `
         <div class="student">
 
-            <h3>Lecture ${index + 1}</h3>
+        <h2>📚 Lecture ${index + 1}</h2>
 
-            <p><b>Date:</b> ${lecture.date}</p>
+        <p><b>📅 Date:</b> ${lecture.date}</p>
 
-            <p><b>Class:</b> ${lecture.className}</p>
+        <p><b>🏫 Class:</b> ${lecture.className}</p>
 
-            <p><b>Subject:</b> ${lecture.subject}</p>
+        <p><b>📖 Subject:</b> ${lecture.subject}</p>
 
-            <p><b>Total Students:</b> ${lecture.students.length}</p>
+        <table border="1" width="100%" cellspacing="0" cellpadding="8">
 
-            <hr>
+        <tr>
+
+        <th>Roll No.</th>
+
+        <th>Name</th>
+
+        <th>Attendance</th>
+
+        </tr>
+        `;
+
+        lecture.students.forEach(student => {
+
+            let color = "black";
+
+            if(student.attendance === "Present"){
+                color = "green";
+            }
+
+            if(student.attendance === "Absent"){
+                color = "red";
+            }
+
+            output += `
+            <tr>
+
+            <td>${student.roll}</td>
+
+            <td>${student.name}</td>
+
+            <td style="color:${color};font-weight:bold;">
+            ${student.attendance}
+            </td>
+
+            </tr>
+            `;
+
+        });
+
+        output += `
+
+        </table>
+
+        <br>
 
         </div>
+
+        <br>
+
         `;
 
     });
