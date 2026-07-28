@@ -166,3 +166,41 @@ function clearData(){
     alert("All saved attendance data has been deleted.");
 
 }
+function saveAttendance() {
+
+    let records = [];
+
+    let students = document.querySelectorAll(".student");
+
+    students.forEach(student => {
+
+        let inputs = student.querySelectorAll("input");
+
+        let roll = inputs[0].value;
+        let name = inputs[1].value;
+
+        let attendance = "Not Marked";
+
+        let buttons = student.querySelectorAll("button");
+
+        if (buttons[0].style.background === "green") {
+            attendance = "Present";
+        }
+
+        if (buttons[1].style.background === "red") {
+            attendance = "Absent";
+        }
+
+        records.push({
+            roll: roll,
+            name: name,
+            attendance: attendance
+        });
+
+    });
+
+    localStorage.setItem("attendanceRecords", JSON.stringify(records));
+
+    alert("✅ Attendance Saved Successfully!");
+
+}
