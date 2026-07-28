@@ -103,10 +103,19 @@ function saveAttendance(){
 
     });
 
-    localStorage.setItem(
-        "attendanceRecords",
-        JSON.stringify(records)
-    );
+    let oldRecords = JSON.parse(localStorage.getItem("attendanceRecords")) || [];
+
+oldRecords.push({
+    date: lectureDate,
+    className: className,
+    subject: subject,
+    students: records
+});
+
+localStorage.setItem(
+    "attendanceRecords",
+    JSON.stringify(oldRecords)
+);
 
     alert("✅ Attendance Saved Successfully!");
 
