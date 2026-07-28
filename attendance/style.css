@@ -1,192 +1,673 @@
+/* ======================================
+   Attendance Management System
+   style.css
+   Part 1
+====================================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
-    color:white;
-    min-height:100vh;
+
+    background:#f4f7fb;
+
+    color:#333;
+
     padding:20px;
+
 }
 
 .container{
-    max-width:1000px;
+
+    max-width:1200px;
+
     margin:auto;
-}
 
-h1{
-    text-align:center;
-    font-size:38px;
-    margin-bottom:10px;
-}
+    background:#fff;
 
-h2{
-    text-align:center;
-    margin:20px 0 15px;
-    color:#FFD700;
-}
-
-p{
-    text-align:center;
-    margin-bottom:15px;
-}
-
-.box{
-    background:white;
-    color:black;
     padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
-    margin-bottom:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
 }
 
-label{
-    font-weight:bold;
-    display:block;
-    margin-top:10px;
-    margin-bottom:5px;
-    text-align:left;
-}
+header{
 
-input{
-    width:100%;
-    padding:12px;
-    border:2px solid #2563eb;
-    border-radius:10px;
-    font-size:16px;
-    outline:none;
-    margin-bottom:15px;
-}
-
-input:focus{
-    border-color:#FFD700;
-}
-
-button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:10px;
-    padding:12px 20px;
-    font-size:16px;
-    cursor:pointer;
-    margin:8px;
-    transition:.3s;
-}
-
-button:hover{
-    background:#0f172a;
-    transform:scale(1.05);
-}
-
-.student{
-    background:white;
-    color:black;
-    padding:20px;
-    margin:20px 0;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
-
-.student h3{
-    color:#1e3a8a;
-    margin-bottom:15px;
-}
-
-.student button:first-of-type{
-    background:#16a34a;
-}
-
-.student button:first-of-type:hover{
-    background:#15803d;
-}
-
-.student button:last-of-type{
-    background:#dc2626;
-}
-
-.student button:last-of-type:hover{
-    background:#b91c1c;
-}
-
-#history{
-    overflow-x:auto;
-    margin-top:20px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    color:black;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-th{
-    background:#2563eb;
-    color:white;
-    padding:12px;
-}
-
-td{
-    padding:10px;
-    border:1px solid #ddd;
     text-align:center;
+
+    margin-bottom:25px;
+
 }
 
-tr:nth-child(even){
-    background:#f3f4f6;
+header h1{
+
+    color:#1976d2;
+
+    margin-bottom:8px;
+
 }
 
-a{
-    display:inline-block;
-    margin-top:25px;
-    color:#FFD700;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:18px;
-}
+header p{
 
-a:hover{
-    color:white;
+    color:#666;
+
 }
 
 hr{
+
+    margin:30px 0;
+
     border:none;
-    height:1px;
-    background:#ddd;
-    margin:20px 0;
+
+    border-top:1px solid #ddd;
+
 }
+
+/* Dashboard */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:15px;
+
+    margin:20px 0;
+
+}
+
+.card{
+
+    background:#1976d2;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.card h3{
+
+    font-size:18px;
+
+    margin-bottom:10px;
+
+}
+
+.card p{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+/* Sections */
+
+.box,
+section{
+
+    margin-top:20px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-top:15px;
+
+    margin-bottom:6px;
+
+    font-weight:600;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    outline:none;
+
+    margin-bottom:12px;
+
+    transition:.3s;
+
+}
+
+input:focus{
+
+    border-color:#1976d2;
+
+    box-shadow:0 0 5px rgba(25,118,210,.3);
+
+}
+
+button{
+
+    padding:12px 18px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#1976d2;
+
+    color:white;
+
+    font-size:15px;
+
+    margin:5px;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#125ea8;
+
+}
+
+.buttonGroup{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+/* ======================================
+   Part 2
+   Student Cards, Tables & Reports
+====================================== */
+
+.student{
+
+    background:#fafafa;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+
+}
+
+.student:hover{
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+    transform:translateY(-2px);
+
+}
+
+.student h3{
+
+    margin-bottom:12px;
+
+    color:#222;
+
+}
+
+.student button{
+
+    min-width:120px;
+
+}
+
+.presentBtn.active{
+
+    background:#2e7d32 !important;
+
+    color:#fff;
+
+}
+
+.absentBtn.active{
+
+    background:#d32f2f !important;
+
+    color:#fff;
+
+}
+
+/* Summary */
+
+.summaryGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+.summaryCard{
+
+    background:#f7f9fc;
+
+    border-left:5px solid #1976d2;
+
+    border-radius:10px;
+
+    padding:18px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+.summaryCard h3{
+
+    color:#1976d2;
+
+    margin-bottom:10px;
+
+}
+
+.summaryCard p{
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+/* Tables */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:15px;
+
+    background:#fff;
+
+}
+
+th{
+
+    background:#1976d2;
+
+    color:#fff;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+td{
+
+    padding:10px;
+
+    border:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+tr:nth-child(even){
+
+    background:#f8f8f8;
+
+}
+
+tr:hover{
+
+    background:#eef5ff;
+
+}
+
+/* History */
+
+.historyCard{
+
+    background:#fff;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    padding:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+.historyCard h2{
+
+    color:#1976d2;
+
+    margin-bottom:15px;
+
+}
+
+.historyCard p{
+
+    margin-bottom:8px;
+
+}
+
+/* Empty Boxes */
+
+.emptyBox{
+
+    text-align:center;
+
+    padding:40px;
+
+    border:2px dashed #bbb;
+
+    border-radius:10px;
+
+    color:#666;
+
+    background:#fafafa;
+
+}
+/* ======================================
+   Part 3
+   Loading, Toast, Modal & Responsive
+====================================== */
+
+/* Footer */
+
+footer{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    padding:20px;
+
+    color:#666;
+
+    border-top:1px solid #ddd;
+
+}
+
+footer p{
+
+    margin:5px 0;
+
+}
+
+/* Loading */
+
+.loading{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.85);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.loader{
+
+    width:55px;
+
+    height:55px;
+
+    border:6px solid #ddd;
+
+    border-top:6px solid #1976d2;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* Toast */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#323232;
+
+    color:#fff;
+
+    padding:14px 20px;
+
+    border-radius:8px;
+
+    display:none;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+    z-index:10000;
+
+}
+
+/* Modal */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9998;
+
+}
+
+.modal-content{
+
+    background:#fff;
+
+    width:90%;
+
+    max-width:450px;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    box-shadow:0 12px 25px rgba(0,0,0,.25);
+
+}
+
+.modal-content h2{
+
+    margin-bottom:12px;
+
+    color:#1976d2;
+
+}
+
+.modal-content p{
+
+    margin-bottom:20px;
+
+}
+
+/* Responsive */
 
 @media(max-width:768px){
 
-    h1{
-        font-size:28px;
+    body{
+
+        padding:10px;
+
     }
 
-    .box{
-        padding:18px;
+    .container{
+
+        padding:15px;
+
     }
 
-    input{
-        font-size:15px;
+    .dashboard{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .summaryGrid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .buttonGroup{
+
+        flex-direction:column;
+
     }
 
     button{
+
         width:100%;
-        margin:8px 0;
+
+        margin:5px 0;
+
     }
 
-    .student{
-        padding:15px;
+    input{
+
+        font-size:16px;
+
     }
 
     table{
-        font-size:14px;
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+
+    }
+
+    .card p{
+
+        font-size:24px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    h1{
+
+        font-size:24px;
+
+    }
+
+    h2{
+
+        font-size:20px;
+
+    }
+
+    .student h3{
+
+        font-size:16px;
+
+    }
+
+    .historyCard{
+
+        padding:15px;
+
     }
 
 }
