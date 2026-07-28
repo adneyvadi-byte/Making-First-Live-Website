@@ -81,11 +81,32 @@ function exportToExcel() {
 
     let table = [];
 
-    table.push([
-        "Roll No",
-        "Student Name",
-        "Attendance"
-    ]);
+    let lectureDate = document.getElementById("lectureDate").value;
+let className = document.getElementById("className").value;
+let subject = document.getElementById("subject").value;
+
+table.push([
+    "Date",
+    lectureDate
+]);
+
+table.push([
+    "Class",
+    className
+]);
+
+table.push([
+    "Subject",
+    subject
+]);
+
+table.push([]);
+
+table.push([
+    "Roll No",
+    "Student Name",
+    "Attendance"
+]);
 
     let students = document.querySelectorAll(".student");
 
