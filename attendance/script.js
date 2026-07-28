@@ -77,3 +77,51 @@ function markAbsent(button){
     document.getElementById("absentCount").innerHTML = absent;
 
 }
+function exportToExcel() {
+
+    let table = [];
+
+    table.push([
+        "Roll No",
+        "Student Name",
+        "Attendance"
+    ]);
+
+    let students = document.querySelectorAll(".student");
+
+    students.forEach(student => {
+
+        let inputs = student.querySelectorAll("input");
+
+        let roll = inputs[0].value;
+        let name = inputs[1].value;
+
+        let attendance = "Not Marked";
+
+        let buttons = student.querySelectorAll("button");
+
+        if(buttons[0].style.background === "green"){
+            attendance = "Present";
+        }
+
+        if(buttons[1].style.background === "red"){
+            attendance = "Absent";
+        }
+
+        table.push([
+            roll,
+            name,
+            attendance
+        ]);
+
+    });
+
+    let workbook = XLSX.utils.book_new();
+
+    let worksheet = XLSX.utils.aoa_to_sheet(table);
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
+
+    XLSX.writeFile(workbook, "Attendance.xlsx");
+
+}
