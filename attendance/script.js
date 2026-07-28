@@ -1,6 +1,6 @@
 let present = 0;
 let absent = 0;
-
+let studentDatabase = [];
 function createList() {
 
     let count = parseInt(document.getElementById("studentCount").value);
@@ -165,5 +165,31 @@ window.onload=function(){
         document.getElementById("studentList").innerHTML=saved;
 
     }
+
+}
+function addStudent(){
+
+    let roll=document.getElementById("rollNumber").value;
+    let name=document.getElementById("studentName").value;
+
+    if(roll==="" || name===""){
+        alert("Please enter Roll Number and Student Name.");
+        return;
+    }
+
+    studentDatabase.push({
+        roll:roll,
+        name:name
+    });
+
+    localStorage.setItem(
+        "studentDatabase",
+        JSON.stringify(studentDatabase)
+    );
+
+    showDatabase();
+
+    document.getElementById("rollNumber").value="";
+    document.getElementById("studentName").value="";
 
 }
