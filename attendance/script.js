@@ -193,3 +193,26 @@ function addStudent(){
     document.getElementById("studentName").value="";
 
 }
+function showDatabase(){
+
+    let data=JSON.parse(localStorage.getItem("studentDatabase")) || [];
+
+    studentDatabase=data;
+
+    let output="";
+
+    data.forEach(student=>{
+
+        output+=`
+        <div class="student">
+
+        <b>${student.roll}</b> - ${student.name}
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("database").innerHTML=output;
+
+}
