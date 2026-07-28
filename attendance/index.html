@@ -10,21 +10,35 @@
 
 <link rel="stylesheet" href="style.css">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
 <div class="container">
 
+<header>
+
 <h1>📋 Attendance Management System</h1>
 
-<p>Professional Attendance Management System</p>
+<p>
+Professional Attendance Management System
+</p>
 
-<div class="dashboard">
+</header>
+
+<!-- Dashboard -->
+
+<section class="dashboard">
 
 <div class="card">
 
-<h3>👨‍🎓 Students</h3>
+<h3>Total Students</h3>
 
 <p id="studentTotal">0</p>
 
@@ -32,7 +46,7 @@
 
 <div class="card">
 
-<h3>✅ Present</h3>
+<h3>Present</h3>
 
 <p id="presentCount">0</p>
 
@@ -40,7 +54,7 @@
 
 <div class="card">
 
-<h3>❌ Absent</h3>
+<h3>Absent</h3>
 
 <p id="absentCount">0</p>
 
@@ -48,52 +62,57 @@
 
 <div class="card">
 
-<h3>📊 Attendance</h3>
+<h3>Attendance %</h3>
 
 <p id="attendancePercent">0%</p>
 
 </div>
 
-</div>
+</section>
 
-<div class="box">
+<!-- Lecture Details -->
 
-<label><b>📅 Lecture Date</b></label><br>
+<section class="box">
+
+<h2>📅 Lecture Details</h2>
+
+<label>Lecture Date</label>
 
 <input
 type="date"
 id="lectureDate">
 
-<br><br>
-
-<label><b>🏫 Class Name</b></label><br>
+<label>Class Name</label>
 
 <input
 type="text"
 id="className"
 placeholder="Enter Class Name">
 
-<br><br>
-
-<label><b>📚 Subject</b></label><br>
+<label>Subject</label>
 
 <input
 type="text"
 id="subject"
 placeholder="Enter Subject">
 
-<br><br>
-
-<button onclick="createList()">
+<button
+id="createAttendanceBtn"
+onclick="createList()">
 
 📋 Create Attendance Sheet
 
 </button>
 
-</div>
+</section>
+
 <hr>
 
-<h2>📋 Today's Attendance</h2>
+<!-- Attendance -->
+
+<section>
+
+<h2>Today's Attendance</h2>
 
 <input
 type="text"
@@ -103,9 +122,15 @@ onkeyup="searchStudent()">
 
 <br><br>
 
-<div id="studentList"></div>
+<div id="studentList">
+
+<p>No attendance sheet created.</p>
+
+</div>
 
 <br>
+
+<div class="buttonGroup">
 
 <button onclick="saveAttendance()">
 💾 Save Attendance
@@ -127,12 +152,22 @@ onkeyup="searchStudent()">
 🗑 Clear Data
 </button>
 
+</div>
+
+</section>
+
 <hr>
-<hr>
+
+<!-- Student Database -->
+
+<section>
 
 <h2>👨‍🎓 Student Database</h2>
 
-<p>Add students once. They will be available for every lecture.</p>
+<p>
+Add students once.
+They will remain saved for future lectures.
+</p>
 
 <input
 type="text"
@@ -144,15 +179,23 @@ type="text"
 id="studentName"
 placeholder="Student Name">
 
+<div class="buttonGroup">
+
 <button onclick="addStudent()">
+
 ➕ Add Student
+
 </button>
 
 <button onclick="showDatabase()">
+
 📋 Show Students
+
 </button>
 
-<br><br>
+</div>
+
+<br>
 
 <input
 type="text"
@@ -162,66 +205,215 @@ onkeyup="searchDatabase()">
 
 <br><br>
 
-<div id="database"></div>
+<div id="database">
+
+<p>No students added.</p>
+
+</div>
+
+</section>
 
 <hr>
-<hr>
+<!-- Attendance Summary -->
+
+<section>
 
 <h2>📊 Attendance Summary</h2>
 
-<p>Total Lectures : <span id="totalLectures">1</span></p>
+<div class="summaryGrid">
 
-<p>
-👨‍🎓 Total Students :
-<span id="studentTotalSummary">0</span>
-</p>
+<div class="summaryCard">
 
-<p>
-✅ Present :
-<span id="presentCount">0</span>
-</p>
+<h3>Total Lectures</h3>
 
-<p>
-❌ Absent :
-<span id="absentCount">0</span>
-</p>
+<p id="totalLectures">0</p>
 
-<p>
-📈 Attendance Percentage :
-<span id="attendancePercentSummary">0%</span>
-</p>
+</div>
+
+<div class="summaryCard">
+
+<h3>Total Students</h3>
+
+<p id="studentTotalSummary">0</p>
+
+</div>
+
+<div class="summaryCard">
+
+<h3>Present</h3>
+
+<p id="summaryPresentCount">0</p>
+
+</div>
+
+<div class="summaryCard">
+
+<h3>Absent</h3>
+
+<p id="summaryAbsentCount">0</p>
+
+</div>
+
+<div class="summaryCard">
+
+<h3>Attendance %</h3>
+
+<p id="attendancePercentSummary">0%</p>
+
+</div>
+
+</div>
+
+</section>
 
 <hr>
+
+<!-- Attendance History -->
+
+<section>
 
 <h2>📜 Attendance History</h2>
 
 <div id="history">
 
-<p>No attendance history available.</p>
+<div class="emptyBox">
+
+<h3>No Attendance History Found</h3>
+
+<p>
+Attendance records will appear here after saving.
+</p>
 
 </div>
 
+</div>
+
+</section>
+
 <hr>
 
-<h2>📊 Attendance Percentage Report</h2>
+<!-- Attendance Report -->
+
+<section>
+
+<h2>📈 Attendance Percentage Report</h2>
 
 <div id="report">
 
-<p>No report generated.</p>
+<div class="emptyBox">
+
+<h3>No Report Generated</h3>
+
+<p>
+Click the <b>Attendance Report</b> button after saving attendance.
+</p>
 
 </div>
+
+</div>
+
+</section>
 
 <hr>
 
-<a class="backButton" href="../index.html">
-⬅ Back to Portfolio
-</a>
+<!-- Footer -->
+
+<footer>
+
+<p>
+
+Attendance Management System
+
+</p>
+
+<p>
+
+Made using HTML, CSS & JavaScript
+
+</p>
+
+</footer>
+<!-- Hidden Statistics (Used by JavaScript) -->
+
+<div id="statistics" style="display:none;">
+
+<span id="presentStudents">0</span>
+
+<span id="absentStudents">0</span>
+
+<span id="notMarkedStudents">0</span>
 
 </div>
 
+<!-- Loading Overlay -->
+
+<div id="loading" class="loading" style="display:none;">
+
+<div class="loader"></div>
+
+<p>Please wait...</p>
+
+</div>
+
+<!-- Confirm Dialog -->
+
+<div id="confirmBox" class="modal" style="display:none;">
+
+<div class="modal-content">
+
+<h2>Confirmation</h2>
+
+<p id="confirmMessage"></p>
+
+<div class="buttonGroup">
+
+<button id="confirmYes">
+Yes
+</button>
+
+<button id="confirmNo">
+No
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Notification -->
+
+<div id="toast" class="toast">
+
+<span id="toastMessage">
+
+</span>
+
+</div>
+
+<!-- JavaScript Library -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
+<!-- Main JavaScript -->
+
 <script src="script.js"></script>
+
+<script>
+
+window.onload = function(){
+
+showDatabase();
+
+updateDashboard();
+
+viewAttendance();
+
+showReport();
+
+};
+
+</script>
 
 </body>
 
