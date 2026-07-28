@@ -163,7 +163,7 @@ window.onload=function(){
     if(saved){
 
         document.getElementById("studentList").innerHTML=saved;
-
+        showDatabase();
     }
 
 }
