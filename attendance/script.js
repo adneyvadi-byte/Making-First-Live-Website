@@ -157,3 +157,12 @@ window.onload = function () {
     }
 
 }
+function clearData(){
+
+    localStorage.clear();
+
+    document.getElementById("studentList").innerHTML = "";
+
+    alert("All saved attendance data has been deleted.");
+
+}
